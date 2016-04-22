@@ -10,5 +10,6 @@ package br.univel_Conexao;
    protectedabstract PreparedStatement getSqlDeleteById(Connection con, Object obj);
  */
 public abstract class SQL_Teste {
+	
 
 }

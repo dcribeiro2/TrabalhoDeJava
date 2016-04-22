@@ -4,7 +4,13 @@ package br.univel_Conexao;
  * nome, endereço, telefone e estado civil, sendo que estado civil é 
  * uma Enum que você deve criar. Ao armazenar esse campo no banco use seu valor ordinal.
  */
-public class Cliente {
+public class Cliente  {
+	
+	
+	
+	/*
+	 * 
+	 
 	private int id;
 	private String nome;
 	public int getId() {
@@ -19,5 +25,5 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+*/
 }
