@@ -7,6 +7,8 @@ public class Teste_Sql extends SQL_P {
 
 	@Override
 	protected String getCreateTable(Connection con, Object obj) {
+		
+		
 		return null;
 	}
 
