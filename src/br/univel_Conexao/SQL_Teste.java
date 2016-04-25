@@ -1,4 +1,8 @@
 package br.univel_Conexao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 /*
  * protectedabstract String getCreateTable(Connection con, Object obj);
    protectedabstract String getDropTable(Connection con, Object obj);
@@ -10,6 +14,16 @@ package br.univel_Conexao;
    protectedabstract PreparedStatement getSqlDeleteById(Connection con, Object obj);
  */
 public abstract class SQL_Teste {
+
+	protected abstract String getCreateTable(Connection con, Object obj);
+	protected abstract String getDropTable(Connection con, Object obj);
+
+	protected abstract PreparedStatement getSqlInsert(Connection con, Object obj);
+	protected abstract PreparedStatement getSqlSelectAll(Connection con, Object obj);
+	protected abstract PreparedStatement getSqlSelectById(Connection con, Object obj);
+	protected abstract PreparedStatement getSqlUpdateById(Connection con, Object obj);
+	protected abstract PreparedStatement getSqlDeleteById(Connection con, Object obj);
+	
 	
 
 }

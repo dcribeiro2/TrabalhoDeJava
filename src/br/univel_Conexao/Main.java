@@ -15,8 +15,7 @@ public class Main<K> implements Dao<K>{
 	}
 
 	@Override
-	public <T> void atualizar(T t) {
-		
+	public <T> void atualizar(T t) {	
 	}
 
 	@Override
