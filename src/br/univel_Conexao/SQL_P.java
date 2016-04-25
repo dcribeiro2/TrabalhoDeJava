@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
    protectedabstract PreparedStatement getSqlUpdateById(Connection con, Object obj);
    protectedabstract PreparedStatement getSqlDeleteById(Connection con, Object obj);
  */
-public abstract class SQL_Teste {
+public abstract class SQL_P {
 
 	protected abstract String getCreateTable(Connection con, Object obj);
 	protected abstract String getDropTable(Connection con, Object obj);
