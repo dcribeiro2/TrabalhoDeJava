@@ -1,14 +1,14 @@
 package br.univel_Conexao;
 import java.util.List;
 
-public abstract class ImplDao implements Dao<Integer, Cliente> {
+public abstract class ImplDao<K, T> implements Dao {
 
-	public void Salvar(Cliente t) {
+	public void Salvar(T t) {
 		System.out.println("Cliente salvo!");
 	}
 
 	@Override
-	public Cliente buscar(Integer k) {
+	public void T buscar(K k) {
 		System.out.println("Cliente buscado!");
 		return null;
 		
@@ -16,13 +16,13 @@ public abstract class ImplDao implements Dao<Integer, Cliente> {
 	}
 
 	@Override
-	public void atualizar(Cliente ){
+	public void atualizar(T t){
 		System.out.println("Dados atualizados!");
 		
 	}
 
 	@Override
-	public void excluir(Integer k) {
+	public void excluir(K k) {
 		System.out.println("Dados excluidos!");
 	}
 
