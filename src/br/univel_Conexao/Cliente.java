@@ -5,6 +5,8 @@ package br.univel_Conexao;
  * uma Enum que você deve criar. Ao armazenar esse campo no banco use seu valor ordinal.
  */
 public class Cliente  {
+	
+	
 	@Coluna(pk=true, nome="idclifor")
 	private int id;
 	@Coluna(nome = "nomecliente", tamanho = 150 )

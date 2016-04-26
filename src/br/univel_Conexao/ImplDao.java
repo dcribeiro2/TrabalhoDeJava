@@ -12,6 +12,7 @@ public abstract class ImplDao implements Dao<Integer, Cliente> {
 		System.out.println("Cliente buscado!");
 		return null;
 		
+		
 	}
 
 	@Override
