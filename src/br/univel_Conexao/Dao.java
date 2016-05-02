@@ -1,7 +1,6 @@
 package br.univel_Conexao;
 
-import java.awt.List;
-
+import java.util.List;
 
 /*
  * public void salvar(T t);
@@ -18,7 +17,7 @@ public interface Dao<T,K> {
 	   public void atualizar(T t);
 	   public void excluir(K k);
 	   
-	   public List listarTodos();
+	   public List<T> listarTodos();
 	
 
 }

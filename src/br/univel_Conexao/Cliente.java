@@ -15,7 +15,7 @@ public class Cliente  {
 	private String endereco;
 	@Coluna(nome = "fone", tamanho = 10)
 	private String telefone;
-	@Coluna(nome = "estCivil")
+	@Coluna(nome = "estadocivil")
 	private Estado_Civil estadocivil;
 
 	public int getId() {

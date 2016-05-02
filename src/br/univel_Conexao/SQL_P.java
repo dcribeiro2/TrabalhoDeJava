@@ -26,10 +26,7 @@ public abstract class SQL_P implements Connection {
 	protected PreparedStatement getSqlSelectById(Connection con, Object obj, int id) {
 	
 		return null;
-	}
-	protected static Object getInstance() {
-		// TODO Auto-generated method stub
-		return null;
+
 	}
 	
 	

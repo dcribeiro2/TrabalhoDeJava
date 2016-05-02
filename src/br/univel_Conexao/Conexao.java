@@ -145,8 +145,8 @@ public class Conexao extends SQL_P {
             String drop = sb.toString();
 
             System.out.println(drop);
-            Statement execute = con.createStatement();
-            execute.executeUpdate(drop);
+            Statement Conexao = con.createStatement();
+            Conexao.executeUpdate(drop);
             return drop;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -387,12 +387,6 @@ public class Conexao extends SQL_P {
         }
         return ps;
     }
-
-	@Override
-	protected PreparedStatement getSqlSelectById(Connection con, Object obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void abort(Executor executor) throws SQLException {
@@ -721,4 +715,11 @@ public class Conexao extends SQL_P {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	protected PreparedStatement getSqlSelectById(Connection con, Object obj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

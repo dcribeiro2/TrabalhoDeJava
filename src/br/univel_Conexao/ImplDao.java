@@ -1,5 +1,16 @@
 package br.univel_Conexao;
+
+
+import br.univel_Conexao.Teste_Sql;
+import br.univel_Conexao.Estado_Civil;
+import br.univel_Conexao.Cliente;
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +22,7 @@ public class ImplDao implements Dao<Cliente, Integer> {
 
 	private PreparedStatement ps = null;
     private ResultSet rs = null;
-    private Connection con = (Connection) SQL_P.getInstance();
+    private Connection con = Teste_Sql.getInstance().open();
     private Conexao e1 = new Conexao();
     private List<Cliente> list = null;
 
@@ -99,7 +110,7 @@ public class ImplDao implements Dao<Cliente, Integer> {
         
 
 	@Override
-	public java.awt.List listarTodos() {
+	public List<Cliente>listarTodos() {
 		try {
             Cliente cl = new Cliente();
             list = new ArrayList<Cliente>();
@@ -116,7 +127,7 @@ public class ImplDao implements Dao<Cliente, Integer> {
             rs.close();
 
             if (list != null) {
-                return (java.awt.List) list;
+                return list;
             }
 
         } catch (SQLException e) {
@@ -131,6 +142,7 @@ public class ImplDao implements Dao<Cliente, Integer> {
 
         return null;
     }
+
 	
 
 }
