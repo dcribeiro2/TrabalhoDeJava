@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Conexao extends Teste_Sql {
+public class Conexao extends SQL_P {
     public Conexao() {
     }
 
@@ -373,4 +373,10 @@ public class Conexao extends Teste_Sql {
         }
         return ps;
     }
+
+	@Override
+	protected PreparedStatement getSqlSelectById(Connection con, Object obj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

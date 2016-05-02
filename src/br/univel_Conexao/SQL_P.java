@@ -23,6 +23,9 @@ public abstract class SQL_P {
 	protected abstract PreparedStatement getSqlSelectById(Connection con, Object obj);
 	protected abstract PreparedStatement getSqlUpdateById(Connection con, Object obj, int id);
 	protected abstract PreparedStatement getSqlDeleteById(Connection con, Object obj, int id);
+	protected PreparedStatement getSqlSelectById(Connection con, Object obj, int id) {
+		return null;
+	}
 
 
 	

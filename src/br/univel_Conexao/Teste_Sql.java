@@ -1,50 +1,50 @@
 package br.univel_Conexao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-public class Teste_Sql extends SQL_P {
+public class Teste_Sql {
 
-	@Override
-	protected String getCreateTable(Connection con, Object obj) {
-		
-		
-		return null;
-	}
+	 private Connection con;
+	    private static Teste_Sql inst;
+	    private String driver = "org.postgresql.Driver";
+	    private String url = "jdbc:postgresql://192.168.99.100:5432/sqlgen";
+	    private String username = "postgres";
+	    private String password = "{root}";
 
-	@Override
-	protected String getDropTable(Connection con, Object obj) {
-		return null;
-	}
+	    public Teste_Sql() {
 
-	@Override
-	protected PreparedStatement getSqlInsert(Connection con, Object obj) {
-		return null;
-	}
+	    }
 
-	@Override
-	protected PreparedStatement getSqlSelectAll(Connection con, Object obj) {
-		return null;
-	}
+	    public static Teste_Sql getInstance() {
+	        if (inst == null)
+	            return inst = new Teste_Sql();
+	        return inst;
+	    }
 
-	
+	    public Connection open() {
+	        try {
+	            Class.forName(driver);
+	            con = DriverManager.getConnection(url, username, password);
+	            return con;
 
-	protected PreparedStatement getSqlSelectById(Connection con, Object obj, int id) {
-		return null;
-	}
+	        } catch (ClassNotFoundException e) {
+	            e.printStackTrace();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return null;
+	    }
 
-	protected PreparedStatement getSqlDeleteById(Connection con, Object obj, int id) {
-		return null;
-	}
-
-	protected PreparedStatement getSqlUpdateById(Connection con, Object obj, int id) {
-		return null;
-	}
-
-	@Override
-	protected PreparedStatement getSqlSelectById(Connection con, Object obj) {
-		return null;
-	}
+	    public void close() {
+	        try {
+	            con.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 	
 
