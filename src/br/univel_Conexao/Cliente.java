@@ -16,7 +16,7 @@ public class Cliente  {
 	@Coluna(nome = "fone", tamanho = 10)
 	private String telefone;
 	@Coluna(nome = "estCivil")
-	private boolean estadocivil;
+	private Estado_Civil estadocivil;
 
 	public int getId() {
 		return id;
@@ -50,14 +50,11 @@ public class Cliente  {
 		this.telefone = telefone;
 	}
 
-	public boolean isEstadocivil() {
-		return estadocivil;
-	}
 
-	public void setEstadocivil(boolean estadocivil) {
+	public void setEstadocivil(Estado_Civil estadocivil) {
 		this.estadocivil = estadocivil;
 	}
-	public Cliente(int id, String nome, String endereco, String telefone, boolean estadocivil) {
+	public Cliente(int id, String nome, String endereco, String telefone, Estado_Civil estado_Civil) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -65,4 +62,15 @@ public class Cliente  {
 		this.telefone = telefone;
 		this.estadocivil = estadocivil;
 	}
+
+	 public Cliente() {
+	}
+
+	public Estado_Civil getestadocivil() {
+	        return estadocivil;
+	    }
+
+	    public void setEstadoCivil(Estado_Civil estadoCivil) {
+	        this.estadocivil = estadocivil;
+	    }
 }

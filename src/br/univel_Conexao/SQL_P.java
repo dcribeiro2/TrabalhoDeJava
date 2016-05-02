@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
    protectedabstract PreparedStatement getSqlUpdateById(Connection con, Object obj);
    protectedabstract PreparedStatement getSqlDeleteById(Connection con, Object obj);
  */
-public abstract class SQL_P {
+public abstract class SQL_P implements Connection {
 
 	protected abstract String getCreateTable(Connection con, Object obj);
 	protected abstract String getDropTable(Connection con, Object obj);
@@ -24,8 +24,15 @@ public abstract class SQL_P {
 	protected abstract PreparedStatement getSqlUpdateById(Connection con, Object obj, int id);
 	protected abstract PreparedStatement getSqlDeleteById(Connection con, Object obj, int id);
 	protected PreparedStatement getSqlSelectById(Connection con, Object obj, int id) {
+	
 		return null;
 	}
+	protected static Object getInstance() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 
 	

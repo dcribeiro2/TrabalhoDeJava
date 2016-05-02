@@ -9,156 +9,128 @@ import java.util.List;
 
 public class ImplDao implements Dao<Cliente, Integer> {
 
-	    Teste_Sql a1 = new Teste_Sql();
-	private Connection con = null;
+	private PreparedStatement ps = null;
+    private ResultSet rs = null;
+    private Connection con = (Connection) SQL_P.getInstance();
+    private Conexao e1 = new Conexao();
+    private List<Cliente> list = null;
 
-	public Connection getCon() {
-		return con;
-	}
+    public void salvar(Cliente cliente) {
+        try {
+            ps = e1.getSqlInsert(con, cliente);
+            ps.executeUpdate();
+            ps.close();
 
-	public void setCon(Connection con) {
-		this.con = con;
-	}
+            System.out.println("Cliente cadastrado com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-	public void criarTabela(Cliente t) {
-         Teste_Sql a1 = new Teste_Sql();
+    public Cliente buscar(Integer integer) {
+        try {
+            Cliente cl = new Cliente();
+            ps = e1.getSqlSelectById(con, cl, integer);
+            rs = ps.executeQuery();
+            rs.next();
 
-		try {
-			String t1 = a1.getCreateTable(con, t);
-			PreparedStatement ps = con.prepareStatement(t1);
-			ps.executeUpdate();
-			ps.close();
+            Estado_Civil ec = Estado_Civil.values()[rs.getInt("ESTADOCIVIL")];
+            cl = new Cliente(rs.getInt("id"), rs.getString("nome"),
+                    rs.getString("endereco"), rs.getString("telefone"), ec);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+            ps.close();
+            rs.close();
+            return cl;
 
-		}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
-	}
+    public void atualizar(Cliente cliente) {
+        try {
+            ps = e1.getSqlUpdateById(con, cliente, cliente.getId());
+            ps.executeUpdate();
+            ps.close();
 
-	@Override
-	public void Salvar(Cliente t) {
-		try {
-			PreparedStatement ps = ex.getSqlInsert(con, t);
-			ps.setInt(1, t.getId());
-			ps.setString(2, t.getNome());
-			ps.setString(3, t.getEndereco());
-			ps.setString(4, t.getTelefone());
-			ps.setInt(5, t.getEstadoCivil().ordinal());
-			ps.executeUpdate();
-			ps.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+            System.out.println("Cliente atualizado com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-	public void apagarTabela(Cliente t) {
-           Teste_Sql gdr = new Teste_Sql();
+    public void excluir(Integer integer) {
+        try {
+            Cliente cl = new Cliente();
+            ps = e1.getSqlDeleteById(con, cl, integer);
+            ps.executeUpdate();
+            ps.close();
+            System.out.println("Cliente excluido com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-		try {
-			String sql = gdr.getDropTable(con, t);
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.executeUpdate();
-			ps.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		}
-
-	}
-
-	@Override
-	public Cliente Buscar(Integer k) {
-		Cliente c = new Cliente();
-
-		try {
-			PreparedStatement ps = ex.getSqlSelectById(con, new Cliente());
-			ps.setInt(1, k);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				c.setId(rs.getInt("Id"));
-				c.setNome(rs.getString("Nome"));
-				c.setTelefone(rs.getString("Telefone"));
-				c.setEndereco(rs.getString("Endereco"));
-				// c.EstadoCivil.values()[rs.getInt("UsEstadoCivil")]);
-			}
-
-			ps.close();
-			rs.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return c;
-	}
-
-	@Override
-	public void Atualizar(Cliente t) {
-		Teste_Sql a1 = new Teste_Sql();
-
-		try {
-			PreparedStatement ps = a1.getSqlUpdateById(con, t);
-			ps.setInt(5, t.getId());
-			ps.setString(1, t.getNome());
-			ps.setString(2, t.getEndereco());
-			ps.setString(3, t.getTelefone());
-			ps.setInt(4, t.getEstadoCivil().ordinal());
-			ps.executeUpdate();
-			ps.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		
-		}
-	}
+        
 
 	@Override
-	public void excluir(Integer pk) {
-		Teste_Sql a1 = new Teste_Sql();
-
-		
+	public java.awt.List listarTodos() {
 		try {
-			PreparedStatement ps = a1.getSqlDeleteById(con, new Cliente());
-			ps.setInt(1, pk);
-			ps.executeUpdate();
-			ps.close();
+            Cliente cl = new Cliente();
+            list = new ArrayList<Cliente>();
+            ps = e1.getSqlSelectAll(con, cl);
+            rs = ps.executeQuery();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+            while (rs.next()) {
+                Estado_Civil ec = Estado_Civil.values()[rs.getInt("ESTADOCIVIL")];
+                list.add(new Cliente(rs.getInt("id"), rs.getString("nome"),
+                        rs.getString("endereco"), rs.getString("telefone"), ec));
+            }
 
-	@Override
-	public List<Cliente> listarTodos() {
-		ExecuteSqlGen ex = new ExecuteSqlGen();
-		List<Cliente> Cliente = new ArrayList<Cliente>();
+            ps.close();
+            rs.close();
 
-		try {
-			PreparedStatement ps = ex.getSqlSelectAll(con, new Cliente());
-			ResultSet exibir = ps.executeQuery();
+            if (list != null) {
+                return (java.awt.List) list;
+            }
 
-			while (exibir.next()) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
-				Cliente c = new Cliente();
-				c.setId(exibir.getInt("UsID"));
-				c.setNome(exibir.getString("UsNome"));
-				c.setEndereco(exibir.getString("UsEndereco"));
-				c.setTelefone(exibir.getString("UsTelefone"));
-				// c.setEstadoCivil(EstadoCivil.getPorCodigo(exibir.getInt("UsEstadoCivil")));
+        return null;
+    }
+	
 
-				Cliente.add(c);
-			}
-
-			ps.close();
-			exibir.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return Cliente;
-	}
 }
