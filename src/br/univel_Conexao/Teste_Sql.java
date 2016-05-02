@@ -27,19 +27,27 @@ public class Teste_Sql extends SQL_P {
 		return null;
 	}
 
+	
+
+	protected PreparedStatement getSqlSelectById(Connection con, Object obj, int id) {
+		return null;
+	}
+
+	protected PreparedStatement getSqlDeleteById(Connection con, Object obj, int id) {
+		return null;
+	}
+
+	protected PreparedStatement getSqlUpdateById(Connection con, Object obj, int id) {
+		return null;
+	}
+
 	@Override
 	protected PreparedStatement getSqlSelectById(Connection con, Object obj) {
 		return null;
 	}
 
-	@Override
-	protected PreparedStatement getSqlUpdateById(Connection con, Object obj) {
-		return null;
-	}
+	
 
-	@Override
-	protected PreparedStatement getSqlDeleteById(Connection con, Object obj) {
-		return null;
-	}
+	
 
 }
